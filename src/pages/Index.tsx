@@ -3,13 +3,23 @@ import { Link } from "react-router-dom";
 import { 
   Calculator, DollarSign, Activity, Clock, Ruler, Info, Building2, 
   Thermometer, Weight, Zap, Droplet, Sun, Magnet, Radio, Flame,
-  ArrowLeft, ArrowRight, ChevronLeft, ChevronRight
+  ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import GoogleAd from "@/components/GoogleAd";
 
-const calculators = [
+type ConverterItem = {
+  title: string;
+  description: string;
+  icon: JSX.Element;
+  href: string;
+  color: string;
+  section?: string;
+};
+
+const calculators: ConverterItem[] = [
   {
     title: "BMI Calculator",
     description: "Calculate your Body Mass Index",
@@ -61,7 +71,7 @@ const calculators = [
   }
 ];
 
-const engineeringConverters = [
+const engineeringConverters: ConverterItem[] = [
   {
     title: "Length",
     description: "Convert between different units of length",
@@ -218,7 +228,7 @@ const engineeringConverters = [
   }
 ];
 
-const heatConverters = [
+const heatConverters: ConverterItem[] = [
   {
     title: "Temperature",
     description: "Convert between different temperature scales",
@@ -249,7 +259,7 @@ const heatConverters = [
   }
 ];
 
-const fluidConverters = [
+const fluidConverters: ConverterItem[] = [
   {
     title: "Flow Rate",
     description: "Convert fluid flow rates",
@@ -273,7 +283,7 @@ const fluidConverters = [
   }
 ];
 
-const lightConverters = [
+const lightConverters: ConverterItem[] = [
   {
     title: "Luminance",
     description: "Convert luminance units",
@@ -297,7 +307,7 @@ const lightConverters = [
   }
 ];
 
-const electricityConverters = [
+const electricityConverters: ConverterItem[] = [
   {
     title: "Electric Current",
     description: "Convert electric current units",
@@ -328,7 +338,7 @@ const electricityConverters = [
   }
 ];
 
-const magnetismConverters = [
+const magnetismConverters: ConverterItem[] = [
   {
     title: "Magnetic Field",
     description: "Convert magnetic field units",
@@ -352,7 +362,7 @@ const magnetismConverters = [
   }
 ];
 
-const radiologyConverters = [
+const radiologyConverters: ConverterItem[] = [
   {
     title: "Radiation Dose",
     description: "Convert radiation dose units",
@@ -389,6 +399,8 @@ const sectionColors = {
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const sections = [
     { title: "Basic Converters", items: calculators },
     { title: "Engineering Converters", items: engineeringConverters },
@@ -408,15 +420,58 @@ const Index = () => {
     setActiveSection((prev) => (prev - 1 + sections.length) % sections.length);
   };
 
+  // Get all converters for search
+  const allConverters = sections.flatMap(section => 
+    section.items.map(item => ({
+      ...item,
+      section: section.title
+    }))
+  );
+
+  // Filter converters based on search query
+  const filteredConverters = searchQuery
+    ? allConverters.filter(converter => 
+        converter.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        converter.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        converter.section.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : sections[activeSection].items;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-2">
               <Calculator className="h-8 w-8 text-blue-600" />
               <h1 className="text-2xl font-bold text-gray-900">ConvertHub</h1>
+            </div>
+            <div className="flex-1 max-w-xl w-full">
+              <div className={`relative transition-all duration-300 ${isSearchFocused ? 'scale-105' : ''}`}>
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-500" />
+                <Input
+                  type="text"
+                  placeholder="Search converters..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setIsSearchFocused(false)}
+                  className={`pl-10 w-full border-2 transition-all duration-300 ${
+                    isSearchFocused 
+                      ? 'border-blue-500 shadow-lg' 
+                      : 'border-gray-200 hover:border-blue-300'
+                  }`}
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
             </div>
             <nav className="hidden md:flex space-x-6">
               <Link to="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</Link>
@@ -443,35 +498,56 @@ const Index = () => {
           <GoogleAd slot="YOUR_TOP_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
 
-        {/* Section Navigation */}
-        <div className="flex items-center justify-between mb-8">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={prevSection}
-            className="flex items-center space-x-2 px-6 py-3 rounded-full hover:shadow-md transition-all"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            <span className="hidden sm:inline">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
-          </Button>
-          <div className={`px-6 py-3 rounded-full text-white font-semibold ${sectionColors[sections[activeSection].title]}`}>
-            {sections[activeSection].title}
+        {/* Section Navigation - Only show when not searching */}
+        {!searchQuery && (
+          <div className="flex items-center justify-between mb-8">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={prevSection}
+              className="flex items-center space-x-2 px-6 py-3 rounded-full hover:shadow-md transition-all"
+            >
+              <ChevronLeft className="h-5 w-5" />
+              <span className="hidden sm:inline">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
+            </Button>
+            <div className={`px-6 py-3 rounded-full text-white font-semibold ${sectionColors[sections[activeSection].title]}`}>
+              {sections[activeSection].title}
+            </div>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={nextSection}
+              className="flex items-center space-x-2 px-6 py-3 rounded-full hover:shadow-md transition-all"
+            >
+              <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
+              <ChevronRight className="h-5 w-5" />
+            </Button>
           </div>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={nextSection}
-            className="flex items-center space-x-2 px-6 py-3 rounded-full hover:shadow-md transition-all"
-          >
-            <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        </div>
+        )}
+
+        {/* Search Results Header */}
+        {searchQuery && (
+          <div className="mb-8 bg-white p-6 rounded-lg shadow-md border border-blue-100 animate-fadeIn">
+            <h3 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
+              <Search className="h-6 w-6 text-blue-500" />
+              Search Results for "{searchQuery}"
+            </h3>
+            <p className="text-gray-600 mt-2">
+              Found {filteredConverters.length} converter{filteredConverters.length !== 1 ? 's' : ''}
+            </p>
+          </div>
+        )}
 
         {/* Converter Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {sections[activeSection].items.map((item, index) => (
-            <Card key={index} className="hover:shadow-lg transition-all duration-300 border-0 shadow-md hover:scale-105">
+          {filteredConverters.map((item, index) => (
+            <Card 
+              key={index} 
+              className={`hover:shadow-lg transition-all duration-300 border-0 shadow-md hover:scale-105 ${
+                searchQuery ? 'animate-fadeIn' : ''
+              }`}
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
               <CardHeader>
                 <div className={`${item.color} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
                   {item.icon}
@@ -480,6 +556,13 @@ const Index = () => {
                 <CardDescription className="text-gray-600">
                   {item.description}
                 </CardDescription>
+                {searchQuery && (
+                  <div className="text-sm text-gray-500 mt-2 flex items-center gap-1">
+                    <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
+                      {item.section}
+                    </span>
+                  </div>
+                )}
               </CardHeader>
               <CardContent>
                 <Link to={item.href}>
@@ -491,6 +574,14 @@ const Index = () => {
             </Card>
           ))}
         </div>
+
+        {/* No Results Message */}
+        {searchQuery && filteredConverters.length === 0 && (
+          <div className="text-center py-12 bg-white rounded-lg shadow-md border border-red-100 animate-fadeIn">
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No converters found</h3>
+            <p className="text-gray-600">Try a different search term or browse through the categories</p>
+          </div>
+        )}
 
         {/* Middle Ad */}
         <div className="my-8">
