@@ -441,15 +441,15 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 md:py-3">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2">
             <div className="flex items-center space-x-2">
-              <Calculator className="h-7 w-7 md:h-8 md:w-8 text-blue-600" />
-              <h1 className="text-xl md:text-2xl font-bold text-gray-900">ConvertHub</h1>
+              <Calculator className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
+              <h1 className="text-lg md:text-2xl font-bold text-gray-900">ConvertHub</h1>
             </div>
             <div className="flex-1 max-w-xl w-full">
               <div className={`relative transition-all duration-300 ${isSearchFocused ? 'scale-105' : ''}`}>
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 md:h-5 md:w-5 text-blue-500" />
+                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 md:h-5 md:w-5 text-blue-500" />
                 <Input
                   type="text"
                   placeholder="Search converters..."
@@ -457,7 +457,7 @@ const Index = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
                   onBlur={() => setIsSearchFocused(false)}
-                  className={`pl-8 md:pl-10 w-full border-2 transition-all duration-300 text-sm md:text-base ${
+                  className={`pl-7 md:pl-10 w-full border-2 transition-all duration-300 text-sm md:text-base ${
                     isSearchFocused 
                       ? 'border-blue-500 shadow-lg' 
                       : 'border-gray-200 hover:border-blue-300'
@@ -466,7 +466,7 @@ const Index = () => {
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-2 md:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
                     ×
                   </button>
@@ -482,45 +482,45 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 md:py-16">
-        <div className="text-center mb-2 md:mb-16">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-4">
+      <section className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 md:py-8">
+        <div className="text-center mb-2">
+          <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1">
             All Your Conversion Needs in One Place
           </h2>
-          <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto mb-2 md:mb-0">
+          <p className="text-sm md:text-xl text-gray-600 max-w-3xl mx-auto">
             Professional calculators and converters for engineering, science, and everyday use. 
             Fast, accurate, and easy to use.
           </p>
         </div>
 
         {/* Top Ad */}
-        <div className="mb-2 md:mb-8">
+        <div className="mb-2">
           <GoogleAd slot="YOUR_TOP_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
 
         {/* Section Navigation - Only show when not searching */}
         {!searchQuery && (
-          <div className="flex items-center justify-between mb-2 md:mb-8">
+          <div className="flex items-center justify-between mb-2">
             <Button
               variant="outline"
               size="lg"
               onClick={prevSection}
-              className="flex items-center space-x-1 md:space-x-2 px-2 md:px-6 py-1 md:py-3 rounded-full hover:shadow-md transition-all text-sm md:text-base"
+              className="flex items-center space-x-1 px-2 py-1 rounded-full hover:shadow-md transition-all text-sm"
             >
-              <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
+              <ChevronLeft className="h-4 w-4" />
               <span className="hidden sm:inline">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
             </Button>
-            <div className={`px-2 md:px-6 py-1 md:py-3 rounded-full text-white font-semibold text-xs md:text-base ${sectionColors[sections[activeSection].title]}`}>
+            <div className={`px-2 py-1 rounded-full text-white font-semibold text-xs ${sectionColors[sections[activeSection].title]}`}>
               {sections[activeSection].title}
             </div>
             <Button
               variant="outline"
               size="lg"
               onClick={nextSection}
-              className="flex items-center space-x-1 md:space-x-2 px-2 md:px-6 py-1 md:py-3 rounded-full hover:shadow-md transition-all text-sm md:text-base"
+              className="flex items-center space-x-1 px-2 py-1 rounded-full hover:shadow-md transition-all text-sm"
             >
               <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
-              <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
+              <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
         )}
@@ -539,7 +539,7 @@ const Index = () => {
         )}
 
         {/* Converter Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5">
           {filteredConverters.map((item, index) => (
             <Card 
               key={index} 
@@ -548,25 +548,25 @@ const Index = () => {
               }`}
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <CardHeader className="p-3 md:p-6">
-                <div className={`${item.color} w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-2 md:mb-4`}>
+              <CardHeader className="p-2">
+                <div className={`${item.color} w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-2`}>
                   {item.icon}
                 </div>
-                <CardTitle className="text-lg md:text-xl">{item.title}</CardTitle>
-                <CardDescription className="text-sm md:text-base text-gray-600">
+                <CardTitle className="text-base md:text-xl">{item.title}</CardTitle>
+                <CardDescription className="text-xs md:text-base text-gray-600">
                   {item.description}
                 </CardDescription>
                 {searchQuery && (
-                  <div className="text-xs md:text-sm text-gray-500 mt-1 md:mt-2 flex items-center gap-1">
-                    <span className="px-2 py-0.5 md:py-1 bg-blue-100 text-blue-700 rounded-full">
+                  <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                    <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">
                       {item.section}
                     </span>
                   </div>
                 )}
               </CardHeader>
-              <CardContent className="p-3 md:p-6 pt-0 md:pt-0">
+              <CardContent className="p-2 pt-0">
                 <Link to={item.href}>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-sm md:text-base">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-sm">
                     Open Converter
                   </Button>
                 </Link>
