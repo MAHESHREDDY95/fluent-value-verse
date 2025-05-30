@@ -577,7 +577,7 @@ const Index = () => {
               className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all text-sm text-blue-800"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
+              <span>{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
             </Button>
             <div className={`px-4 py-2 rounded-lg text-white font-medium text-sm ${sectionColors[sections[activeSection].title]}`}>
               {sections[activeSection].title}
@@ -588,7 +588,7 @@ const Index = () => {
               onClick={nextSection}
               className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all text-sm text-blue-800"
             >
-              <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
+              <span>{sections[(activeSection + 1) % sections.length].title}</span>
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
