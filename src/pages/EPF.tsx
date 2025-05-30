@@ -114,7 +114,7 @@ const EPF = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
             <div className="flex items-center space-x-4">
               <Link to="/">
                 <Button variant="ghost" size="sm">
@@ -124,10 +124,10 @@ const EPF = () => {
               </Link>
               <div className="flex items-center space-x-2">
                 <Building2 className="h-8 w-8 text-blue-600" />
-                <h1 className="text-2xl font-bold text-gray-900">EPF Calculator</h1>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">EPF Calculator</h1>
               </div>
             </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700">
               <Calculator className="h-4 w-4 mr-2" />
               Open Calculator
             </Button>
@@ -135,22 +135,22 @@ const EPF = () => {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
           {/* Input Section */}
           <Card>
-            <CardHeader>
-              <CardTitle>Calculate Your EPF</CardTitle>
-              <CardDescription>
+            <CardHeader className="space-y-2">
+              <CardTitle className="text-xl sm:text-2xl">Calculate Your EPF</CardTitle>
+              <CardDescription className="text-sm sm:text-base">
                 Estimate your EPF maturity amount and contributions
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 sm:space-y-6">
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="deductionType">Organization Deduction Type</Label>
+                  <Label htmlFor="deductionType" className="text-sm sm:text-base">Organization Deduction Type</Label>
                   <Select value={deductionType} onValueChange={setDeductionType}>
-                    <SelectTrigger>
+                    <SelectTrigger className="mt-1">
                       <SelectValue placeholder="Select deduction type" />
                     </SelectTrigger>
                     <SelectContent>
@@ -164,54 +164,58 @@ const EPF = () => {
                 </div>
 
                 {deductionType === "Custom" && (
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="customEmployeeRate">Employee Rate (%)</Label>
+                      <Label htmlFor="customEmployeeRate" className="text-sm sm:text-base">Employee Rate (%)</Label>
                       <Input
                         id="customEmployeeRate"
                         type="number"
                         value={customEmployeeRate}
                         onChange={(e) => setCustomEmployeeRate(e.target.value)}
                         placeholder="Enter rate"
+                        className="mt-1"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="customEmployerRate">Employer Rate (%)</Label>
+                      <Label htmlFor="customEmployerRate" className="text-sm sm:text-base">Employer Rate (%)</Label>
                       <Input
                         id="customEmployerRate"
                         type="number"
                         value={customEmployerRate}
                         onChange={(e) => setCustomEmployerRate(e.target.value)}
                         placeholder="Enter rate"
+                        className="mt-1"
                       />
                     </div>
                   </div>
                 )}
 
                 <div>
-                  <Label htmlFor="basicSalary">Basic Salary (₹)</Label>
+                  <Label htmlFor="basicSalary" className="text-sm sm:text-base">Basic Salary (₹)</Label>
                   <Input
                     id="basicSalary"
                     type="number"
                     value={basicSalary}
                     onChange={(e) => setBasicSalary(e.target.value)}
                     placeholder="Enter basic salary"
+                    className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="dearnessAllowance">Dearness Allowance (₹)</Label>
+                  <Label htmlFor="dearnessAllowance" className="text-sm sm:text-base">Dearness Allowance (₹)</Label>
                   <Input
                     id="dearnessAllowance"
                     type="number"
                     value={dearnessAllowance}
                     onChange={(e) => setDearnessAllowance(e.target.value)}
                     placeholder="Enter DA"
+                    className="mt-1"
                   />
                 </div>
 
                 <div>
-                  <Label>Current Age: {currentAge} years</Label>
+                  <Label className="text-sm sm:text-base">Current Age: {currentAge} years</Label>
                   <Slider
                     value={[currentAge]}
                     onValueChange={(value) => setCurrentAge(value[0])}
@@ -223,7 +227,7 @@ const EPF = () => {
                 </div>
 
                 <div>
-                  <Label>Retirement Age: {retirementAge} years</Label>
+                  <Label className="text-sm sm:text-base">Retirement Age: {retirementAge} years</Label>
                   <Slider
                     value={[retirementAge]}
                     onValueChange={(value) => setRetirementAge(value[0])}
@@ -235,7 +239,7 @@ const EPF = () => {
                 </div>
 
                 <div>
-                  <Label>Interest Rate: {interestRate}%</Label>
+                  <Label className="text-sm sm:text-base">Interest Rate: {interestRate}%</Label>
                   <Slider
                     value={[interestRate]}
                     onValueChange={(value) => setInterestRate(value[0])}
@@ -251,75 +255,77 @@ const EPF = () => {
 
           {/* Results Section */}
           <Card>
-            <CardHeader>
-              <CardTitle>EPF Calculation Results</CardTitle>
-              <CardDescription>
+            <CardHeader className="space-y-2">
+              <CardTitle className="text-xl sm:text-2xl">EPF Calculation Results</CardTitle>
+              <CardDescription className="text-sm sm:text-base">
                 Your estimated EPF maturity details
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 sm:space-y-6">
               {calculation && (
                 <>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-blue-50 p-4 rounded-lg">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="bg-blue-50 p-3 sm:p-4 rounded-lg">
                       <div className="text-sm text-blue-600">Monthly Contribution</div>
-                      <div className="text-2xl font-bold">₹{calculation.totalContribution.toFixed(2)}</div>
+                      <div className="text-xl sm:text-2xl font-bold">₹{calculation.totalContribution.toFixed(2)}</div>
                       <div className="text-xs text-blue-500">
                         Employee: ₹{calculation.employeeContribution.toFixed(2)} + 
                         Employer: ₹{calculation.employerContribution.toFixed(2)}
                       </div>
                     </div>
-                    <div className="bg-green-50 p-4 rounded-lg">
+                    <div className="bg-green-50 p-3 sm:p-4 rounded-lg">
                       <div className="text-sm text-green-600">Interest Earned</div>
-                      <div className="text-2xl font-bold">₹{calculation.interestEarned.toFixed(2)}</div>
+                      <div className="text-xl sm:text-2xl font-bold">₹{calculation.interestEarned.toFixed(2)}</div>
                       <div className="text-xs text-green-500">Over {retirementAge - currentAge} years</div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-purple-50 p-4 rounded-lg">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="bg-purple-50 p-3 sm:p-4 rounded-lg">
                       <div className="text-sm text-purple-600">EPF Maturity Amount</div>
-                      <div className="text-3xl font-bold">₹{calculation.maturityAmount.toFixed(2)}</div>
+                      <div className="text-2xl sm:text-3xl font-bold">₹{calculation.maturityAmount.toFixed(2)}</div>
                       <div className="text-xs text-purple-500">At retirement age {retirementAge}</div>
                     </div>
-                    <div className="bg-orange-50 p-4 rounded-lg">
+                    <div className="bg-orange-50 p-3 sm:p-4 rounded-lg">
                       <div className="text-sm text-orange-600">Pension Amount</div>
-                      <div className="text-3xl font-bold">₹{calculation.pensionAmount.toFixed(2)}</div>
+                      <div className="text-2xl sm:text-3xl font-bold">₹{calculation.pensionAmount.toFixed(2)}</div>
                       <div className="text-xs text-orange-500">Total pension contribution</div>
                     </div>
                   </div>
 
-                  <div className="bg-indigo-50 p-4 rounded-lg">
+                  <div className="bg-indigo-50 p-3 sm:p-4 rounded-lg">
                     <div className="text-sm text-indigo-600">Total Retirement Corpus</div>
-                    <div className="text-3xl font-bold">₹{(calculation.maturityAmount + calculation.pensionAmount).toFixed(2)}</div>
+                    <div className="text-2xl sm:text-3xl font-bold">₹{(calculation.maturityAmount + calculation.pensionAmount).toFixed(2)}</div>
                     <div className="text-xs text-indigo-500">EPF + Pension at retirement</div>
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Year-wise Breakdown</h3>
+                    <h3 className="font-semibold text-base sm:text-lg">Year-wise Breakdown</h3>
                     <div className="max-h-60 overflow-y-auto">
-                      <table className="w-full text-sm">
-                        <thead className="bg-gray-50">
-                          <tr>
-                            <th className="p-2 text-left">Year</th>
-                            <th className="p-2 text-right">Opening</th>
-                            <th className="p-2 text-right">Contribution</th>
-                            <th className="p-2 text-right">Interest</th>
-                            <th className="p-2 text-right">Closing</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {calculation.yearWiseBreakdown.map((year) => (
-                            <tr key={year.year} className="border-t">
-                              <td className="p-2">{year.year}</td>
-                              <td className="p-2 text-right">₹{year.openingBalance.toFixed(2)}</td>
-                              <td className="p-2 text-right">₹{year.contribution.toFixed(2)}</td>
-                              <td className="p-2 text-right">₹{year.interest.toFixed(2)}</td>
-                              <td className="p-2 text-right">₹{year.closingBalance.toFixed(2)}</td>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th className="p-2 text-left">Year</th>
+                              <th className="p-2 text-right">Opening</th>
+                              <th className="p-2 text-right">Contribution</th>
+                              <th className="p-2 text-right">Interest</th>
+                              <th className="p-2 text-right">Closing</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody>
+                            {calculation.yearWiseBreakdown.map((year) => (
+                              <tr key={year.year} className="border-t">
+                                <td className="p-2">{year.year}</td>
+                                <td className="p-2 text-right">₹{year.openingBalance.toFixed(2)}</td>
+                                <td className="p-2 text-right">₹{year.contribution.toFixed(2)}</td>
+                                <td className="p-2 text-right">₹{year.interest.toFixed(2)}</td>
+                                <td className="p-2 text-right">₹{year.closingBalance.toFixed(2)}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </>
@@ -329,20 +335,20 @@ const EPF = () => {
         </div>
 
         {/* Information Section */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="flex items-center">
+        <Card className="mt-4 sm:mt-8">
+          <CardHeader className="space-y-2">
+            <CardTitle className="flex items-center text-xl sm:text-2xl">
               <Info className="h-5 w-5 mr-2" />
               About EPF
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="prose prose-sm max-w-none">
+            <div className="prose prose-sm sm:prose-base max-w-none">
               <p>
                 The Employee Provident Fund (EPF) is a retirement benefits scheme in which employees of an organization contribute a portion of their basic salary and dearness allowance every month. The employer also contributes an equal amount to the employee's EPF account.
               </p>
-              <h3>Key Features:</h3>
-              <ul>
+              <h3 className="text-base sm:text-lg font-semibold mt-4">Key Features:</h3>
+              <ul className="list-disc pl-4 space-y-1">
                 <li>Employee contribution: 12% of basic salary + DA (or fixed amount)</li>
                 <li>Employer contribution: 12% of basic salary + DA (or fixed amount)</li>
                 <li>Maximum contribution limit: ₹21,600 per month</li>
