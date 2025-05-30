@@ -5,10 +5,14 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/fluent-value-verse/',
+  base: '/fluent-value-verse/', // GitHub Pages base URL
   server: {
     host: "::",
     port: 8080,
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
   },
   plugins: [
     react(),
