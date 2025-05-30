@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Calculator, DollarSign, Activity, Clock, Ruler, Info } from "lucide-react";
+import { Calculator, DollarSign, Activity, Clock, Ruler, Info, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import GoogleAd from "@/components/GoogleAd";
@@ -41,6 +41,13 @@ const Index = () => {
       icon: Clock,
       path: "/timestamp",
       color: "bg-red-500"
+    },
+    {
+      title: "EPF Calculator",
+      description: "Calculate your EPF maturity amount and pension benefits",
+      icon: Building2,
+      path: "/epf",
+      color: "bg-indigo-500"
     },
     {
       title: "Information Hub",

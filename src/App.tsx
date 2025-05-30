@@ -9,6 +9,7 @@ import BMI from "./pages/BMI";
 import EMI from "./pages/EMI";
 import Units from "./pages/Units";
 import Timestamp from "./pages/Timestamp";
+import EPF from "./pages/EPF";
 import Info from "./pages/Info";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/emi" element={<EMI />} />
           <Route path="/units" element={<Units />} />
           <Route path="/timestamp" element={<Timestamp />} />
+          <Route path="/epf" element={<EPF />} />
           <Route path="/info" element={<Info />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
