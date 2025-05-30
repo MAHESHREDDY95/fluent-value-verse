@@ -482,42 +482,42 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
-        <div className="text-center mb-8 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-16">
+        <div className="text-center mb-4 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">
             All Your Conversion Needs in One Place
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-4 md:mb-0">
             Professional calculators and converters for engineering, science, and everyday use. 
             Fast, accurate, and easy to use.
           </p>
         </div>
 
         {/* Top Ad */}
-        <div className="mb-6 md:mb-8">
+        <div className="mb-4 md:mb-8">
           <GoogleAd slot="YOUR_TOP_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
 
         {/* Section Navigation - Only show when not searching */}
         {!searchQuery && (
-          <div className="flex items-center justify-between mb-6 md:mb-8">
+          <div className="flex items-center justify-between mb-4 md:mb-8">
             <Button
               variant="outline"
               size="lg"
               onClick={prevSection}
-              className="flex items-center space-x-2 px-4 md:px-6 py-2 md:py-3 rounded-full hover:shadow-md transition-all"
+              className="flex items-center space-x-2 px-3 md:px-6 py-2 md:py-3 rounded-full hover:shadow-md transition-all"
             >
               <ChevronLeft className="h-5 w-5" />
               <span className="hidden sm:inline">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
             </Button>
-            <div className={`px-4 md:px-6 py-2 md:py-3 rounded-full text-white font-semibold text-sm md:text-base ${sectionColors[sections[activeSection].title]}`}>
+            <div className={`px-3 md:px-6 py-2 md:py-3 rounded-full text-white font-semibold text-sm md:text-base ${sectionColors[sections[activeSection].title]}`}>
               {sections[activeSection].title}
             </div>
             <Button
               variant="outline"
               size="lg"
               onClick={nextSection}
-              className="flex items-center space-x-2 px-4 md:px-6 py-2 md:py-3 rounded-full hover:shadow-md transition-all"
+              className="flex items-center space-x-2 px-3 md:px-6 py-2 md:py-3 rounded-full hover:shadow-md transition-all"
             >
               <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
               <ChevronRight className="h-5 w-5" />
