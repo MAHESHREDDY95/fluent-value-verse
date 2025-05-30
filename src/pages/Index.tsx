@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { 
   Calculator, DollarSign, Activity, Clock, Ruler, Info, Building2, 
@@ -20,15 +21,15 @@ type ConverterItem = {
 };
 
 const calculators: ConverterItem[] = [
-  {
-    title: "BMI Calculator",
+    {
+      title: "BMI Calculator",
     description: "Calculate your Body Mass Index",
     icon: <Calculator className="h-6 w-6" />,
     href: "/bmi",
-    color: "bg-blue-500"
-  },
-  {
-    title: "EMI Calculator",
+      color: "bg-blue-500"
+    },
+    {
+      title: "EMI Calculator",
     description: "Calculate your loan EMI",
     icon: <DollarSign className="h-6 w-6" />,
     href: "/emi",
@@ -39,16 +40,16 @@ const calculators: ConverterItem[] = [
     description: "Convert between different currencies",
     icon: <DollarSign className="h-6 w-6" />,
     href: "/currency",
-    color: "bg-purple-500"
-  },
-  {
+      color: "bg-purple-500"
+    },
+    {
     title: "Timestamp Converter",
     description: "Convert between different time formats",
     icon: <Clock className="h-6 w-6" />,
     href: "/timestamp",
-    color: "bg-orange-500"
-  },
-  {
+      color: "bg-orange-500"
+    },
+    {
     title: "Units Converter",
     description: "Convert between different units",
     icon: <Ruler className="h-6 w-6" />,
@@ -61,10 +62,10 @@ const calculators: ConverterItem[] = [
     icon: <Building2 className="h-6 w-6" />,
     href: "/epf",
     color: "bg-teal-500"
-  },
-  {
-    title: "Information Hub",
-    description: "Learn about conversions, formulas and calculations",
+    },
+    {
+      title: "Information Hub",
+      description: "Learn about conversions, formulas and calculations",
     icon: <Info className="h-6 w-6" />,
     href: "/info",
     color: "bg-cyan-500"
@@ -272,7 +273,7 @@ const fluidConverters: ConverterItem[] = [
     description: "Convert viscosity units",
     icon: <Droplet className="h-6 w-6" />,
     href: "/units?type=viscosity",
-    color: "bg-indigo-500"
+      color: "bg-indigo-500"
   },
   {
     title: "Surface Tension",
@@ -386,6 +387,28 @@ const radiologyConverters: ConverterItem[] = [
   }
 ];
 
+const sectionBgColors = {
+  "Basic Converters": "bg-blue-50",
+  "Engineering Converters": "bg-green-50",
+  "Heat Converters": "bg-red-50",
+  "Fluid Converters": "bg-blue-50",
+  "Light Converters": "bg-yellow-50",
+  "Electricity Converters": "bg-purple-50",
+  "Magnetism Converters": "bg-indigo-50",
+  "Radiology Converters": "bg-emerald-50"
+};
+
+const sectionBorderColors = {
+  "Basic Converters": "border-blue-200",
+  "Engineering Converters": "border-green-200",
+  "Heat Converters": "border-red-200",
+  "Fluid Converters": "border-blue-200",
+  "Light Converters": "border-yellow-200",
+  "Electricity Converters": "border-purple-200",
+  "Magnetism Converters": "border-indigo-200",
+  "Radiology Converters": "border-emerald-200"
+};
+
 const sectionColors = {
   "Basic Converters": "bg-gradient-to-r from-blue-500 to-blue-600",
   "Engineering Converters": "bg-gradient-to-r from-green-500 to-green-600",
@@ -395,6 +418,28 @@ const sectionColors = {
   "Electricity Converters": "bg-gradient-to-r from-purple-400 to-purple-500",
   "Magnetism Converters": "bg-gradient-to-r from-indigo-400 to-indigo-500",
   "Radiology Converters": "bg-gradient-to-r from-emerald-400 to-emerald-500"
+};
+
+const sectionTextColors = {
+  "Basic Converters": "text-blue-700",
+  "Engineering Converters": "text-green-700",
+  "Heat Converters": "text-red-700",
+  "Fluid Converters": "text-blue-600",
+  "Light Converters": "text-yellow-600",
+  "Electricity Converters": "text-purple-600",
+  "Magnetism Converters": "text-indigo-600",
+  "Radiology Converters": "text-emerald-600"
+};
+
+const sectionIconColors = {
+  "Basic Converters": "text-blue-700",
+  "Engineering Converters": "text-green-700",
+  "Heat Converters": "text-red-700",
+  "Fluid Converters": "text-blue-600",
+  "Light Converters": "text-yellow-600",
+  "Electricity Converters": "text-purple-600",
+  "Magnetism Converters": "text-indigo-600",
+  "Radiology Converters": "text-emerald-600"
 };
 
 const Index = () => {
@@ -438,18 +483,18 @@ const Index = () => {
     : sections[activeSection].items;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-2">
-            <div className="flex items-center space-x-2">
-              <Calculator className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
-              <h1 className="text-lg md:text-2xl font-bold text-gray-900">ConvertHub</h1>
+      <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+            <div className="flex items-center space-x-3">
+              <Calculator className="h-7 w-7 text-blue-700" />
+              <h1 className="text-xl font-semibold text-gray-900">ConvertHub</h1>
             </div>
             <div className="flex-1 max-w-xl w-full">
               <div className={`relative transition-all duration-300 ${isSearchFocused ? 'scale-105' : ''}`}>
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 md:h-5 md:w-5 text-blue-500" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
                 <Input
                   type="text"
                   placeholder="Search converters..."
@@ -457,16 +502,16 @@ const Index = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
                   onBlur={() => setIsSearchFocused(false)}
-                  className={`pl-7 md:pl-10 w-full border-2 transition-all duration-300 text-sm md:text-base ${
+                  className={`pl-9 w-full border border-gray-200 rounded-lg bg-gray-50/50 backdrop-blur-sm transition-all duration-300 text-sm ${
                     isSearchFocused 
-                      ? 'border-blue-500 shadow-lg' 
-                      : 'border-gray-200 hover:border-blue-300'
+                      ? 'ring-2 ring-blue-600/20 border-blue-600/50 shadow-sm' 
+                      : 'hover:border-gray-300'
                   }`}
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
                   >
                     ×
                   </button>
@@ -474,84 +519,74 @@ const Index = () => {
               </div>
             </div>
             <nav className="hidden md:flex space-x-6">
-              <Link to="/" className="text-gray-600 hover:text-blue-600 transition-colors">Home</Link>
-              <Link to="/info" className="text-gray-600 hover:text-blue-600 transition-colors">Info</Link>
+              <Link to="/" className="text-sm text-gray-700 hover:text-blue-700 transition-colors">Home</Link>
+              <Link to="/info" className="text-sm text-gray-700 hover:text-blue-700 transition-colors">Info</Link>
             </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 md:py-8">
-        <div className="text-center mb-2">
-          <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-4xl font-semibold text-gray-900 mb-3">
             All Your Conversion Needs in One Place
           </h2>
-          <p className="text-sm md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
             Professional calculators and converters for engineering, science, and everyday use. 
             Fast, accurate, and easy to use.
           </p>
         </div>
 
-        {/* Features Section - Moved up and overlayed */}
-        <section className="mt-2">
-          <div className="text-center mb-2">
-            <h3 className="text-lg md:text-3xl font-bold text-gray-900 mb-1">Why Choose ConvertHub?</h3>
-            <p className="text-sm md:text-lg text-gray-600">Professional tools for accurate calculations</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-            <div className="text-center p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-1">
-                <Calculator className="h-6 w-6 text-blue-600" />
+        {/* Features Section */}
+        <section className="mb-8 md:mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="bg-blue-50 backdrop-blur-md rounded-[2.5rem] p-6 border border-blue-200 shadow-sm hover:shadow-md transition-all hover:bg-blue-100">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-blue-200 to-blue-300 shadow-inner">
+                <Calculator className="h-8 w-8 text-blue-800 transform hover:scale-110 transition-transform" />
               </div>
-              <h4 className="text-base md:text-xl font-semibold mb-1">Accurate Calculations</h4>
-              <p className="text-xs md:text-sm text-gray-600">Precise formulas and real-time data for reliable results</p>
+              <h4 className="text-lg font-semibold text-blue-900 mb-2">Accurate Calculations</h4>
+              <p className="text-sm text-blue-700">Precise formulas and real-time data for reliable results</p>
             </div>
             
-            <div className="text-center p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-1">
-                <DollarSign className="h-6 w-6 text-green-600" />
+            <div className="bg-green-50 backdrop-blur-md rounded-[2.5rem] p-6 border border-green-200 shadow-sm hover:shadow-md transition-all hover:bg-green-100">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-green-200 to-green-300 shadow-inner">
+                <DollarSign className="h-8 w-8 text-green-800 transform hover:scale-110 transition-transform" />
               </div>
-              <h4 className="text-base md:text-xl font-semibold mb-1">Real-time Rates</h4>
-              <p className="text-xs md:text-sm text-gray-600">Live currency exchange rates and updated information</p>
+              <h4 className="text-lg font-semibold text-green-900 mb-2">Real-time Rates</h4>
+              <p className="text-sm text-green-700">Live currency exchange rates and updated information</p>
             </div>
             
-            <div className="text-center p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-1">
-                <Activity className="h-6 w-6 text-purple-600" />
+            <div className="bg-purple-50 backdrop-blur-md rounded-[2.5rem] p-6 border border-purple-200 shadow-sm hover:shadow-md transition-all hover:bg-purple-100">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-purple-200 to-purple-300 shadow-inner">
+                <Activity className="h-8 w-8 text-purple-800 transform hover:scale-110 transition-transform" />
               </div>
-              <h4 className="text-base md:text-xl font-semibold mb-1">Easy to Use</h4>
-              <p className="text-xs md:text-sm text-gray-600">Intuitive interface designed for quick calculations</p>
+              <h4 className="text-lg font-semibold text-purple-900 mb-2">Easy to Use</h4>
+              <p className="text-sm text-purple-700">Intuitive interface designed for quick calculations</p>
             </div>
           </div>
         </section>
 
-        {/* Top Ad */}
-        <div className="my-2">
-          <GoogleAd slot="YOUR_TOP_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
-        </div>
-
         {/* Section Navigation - Only show when not searching */}
         {!searchQuery && (
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-6">
             <Button
               variant="outline"
               size="lg"
               onClick={prevSection}
-              className="flex items-center space-x-1 px-2 py-1 rounded-full hover:shadow-md transition-all text-sm"
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all text-sm text-blue-800"
             >
               <ChevronLeft className="h-4 w-4" />
               <span className="hidden sm:inline">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
             </Button>
-            <div className={`px-2 py-1 rounded-full text-white font-semibold text-xs ${sectionColors[sections[activeSection].title]}`}>
+            <div className={`px-4 py-2 rounded-lg text-white font-medium text-sm ${sectionColors[sections[activeSection].title]}`}>
               {sections[activeSection].title}
             </div>
             <Button
               variant="outline"
               size="lg"
               onClick={nextSection}
-              className="flex items-center space-x-1 px-2 py-1 rounded-full hover:shadow-md transition-all text-sm"
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all text-sm text-blue-800"
             >
               <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
               <ChevronRight className="h-4 w-4" />
@@ -560,52 +595,55 @@ const Index = () => {
         )}
 
         {/* Converter Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5">
-          {filteredConverters.map((item, index) => (
-            <Card 
-              key={index} 
-              className={`hover:shadow-lg transition-all duration-300 border-0 shadow-md hover:scale-105 ${
-                searchQuery ? 'animate-fadeIn' : ''
-              }`}
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              <CardHeader className="p-2">
-                <div className={`${item.color} w-8 h-8 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-2`}>
-                  {item.icon}
-                </div>
-                <CardTitle className="text-base md:text-xl">{item.title}</CardTitle>
-                <CardDescription className="text-xs md:text-base text-gray-600">
-                  {item.description}
-                </CardDescription>
-                {searchQuery && (
-                  <div className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                    <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">
-                      {item.section}
-                    </span>
-                  </div>
-                )}
-              </CardHeader>
-              <CardContent className="p-2 pt-0">
-                <Link to={item.href}>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-sm">
-                    Open Converter
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          {filteredConverters.map((item, index) => {
+            const section = item.section || sections[activeSection].title;
+            const iconColor = sectionIconColors[section];
+            const bgColor = sectionBgColors[section].replace('bg-', 'bg-gradient-to-br from-').replace('-50', '-200 to-').replace('-100/80', '-300');
+            return (
+              <Link to={item.href} key={index}>
+                <Card 
+                  className={`hover:shadow-lg transition-all duration-300 border ${sectionBorderColors[section]} ${sectionBgColors[section]} backdrop-blur-sm hover:scale-[1.02] rounded-[2.5rem] cursor-pointer ${
+                    searchQuery ? 'animate-fadeIn' : ''
+                  }`}
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <CardHeader className="p-4">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 ${bgColor} shadow-inner`}>
+                      {React.cloneElement(item.icon, { 
+                        className: `h-7 w-7 ${iconColor.replace('-700', '-800')} transform hover:scale-110 transition-transform`
+                      })}
+                    </div>
+                    <CardTitle className={`text-base font-semibold ${sectionTextColors[section]}`}>
+                      {item.title}
+                    </CardTitle>
+                    <CardDescription className={`text-sm ${sectionTextColors[section].replace('text-', 'text-').replace('-700', '-600')}`}>
+                      {item.description}
+                    </CardDescription>
+                    {searchQuery && (
+                      <div className="text-xs text-gray-600 mt-2 flex items-center gap-1">
+                        <span className={`px-2 py-1 ${sectionBgColors[section].replace('bg-', 'bg-').replace('-50', '-100')} ${sectionTextColors[section]} rounded-full`}>
+                          {item.section}
+                        </span>
+                      </div>
+                    )}
+                  </CardHeader>
+                </Card>
+              </Link>
+            );
+          })}
         </div>
 
         {/* Bottom Ad */}
-        <div className="mt-2">
+        <div className="mt-8">
           <GoogleAd slot="YOUR_BOTTOM_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t mt-2">
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4">
-          <div className="text-center text-gray-600 text-sm">
+      <footer className="bg-white/80 backdrop-blur-md border-t border-gray-200 mt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="text-center text-sm text-gray-600">
             <p>&copy; 2024 ConvertHub. All rights reserved. Professional conversion tools for everyone.</p>
           </div>
         </div>
