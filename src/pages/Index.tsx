@@ -493,8 +493,42 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Features Section - Moved up and overlayed */}
+        <section className="mt-2">
+          <div className="text-center mb-2">
+            <h3 className="text-lg md:text-3xl font-bold text-gray-900 mb-1">Why Choose ConvertHub?</h3>
+            <p className="text-sm md:text-lg text-gray-600">Professional tools for accurate calculations</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            <div className="text-center p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-1">
+                <Calculator className="h-6 w-6 text-blue-600" />
+              </div>
+              <h4 className="text-base md:text-xl font-semibold mb-1">Accurate Calculations</h4>
+              <p className="text-xs md:text-sm text-gray-600">Precise formulas and real-time data for reliable results</p>
+            </div>
+            
+            <div className="text-center p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-1">
+                <DollarSign className="h-6 w-6 text-green-600" />
+              </div>
+              <h4 className="text-base md:text-xl font-semibold mb-1">Real-time Rates</h4>
+              <p className="text-xs md:text-sm text-gray-600">Live currency exchange rates and updated information</p>
+            </div>
+            
+            <div className="text-center p-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-1">
+                <Activity className="h-6 w-6 text-purple-600" />
+              </div>
+              <h4 className="text-base md:text-xl font-semibold mb-1">Easy to Use</h4>
+              <p className="text-xs md:text-sm text-gray-600">Intuitive interface designed for quick calculations</p>
+            </div>
+          </div>
+        </section>
+
         {/* Top Ad */}
-        <div className="mb-2">
+        <div className="my-2">
           <GoogleAd slot="YOUR_TOP_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
 
@@ -522,19 +556,6 @@ const Index = () => {
               <span className="hidden sm:inline">{sections[(activeSection + 1) % sections.length].title}</span>
               <ChevronRight className="h-4 w-4" />
             </Button>
-          </div>
-        )}
-
-        {/* Search Results Header */}
-        {searchQuery && (
-          <div className="mb-8 bg-white p-6 rounded-lg shadow-md border border-blue-100 animate-fadeIn">
-            <h3 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
-              <Search className="h-6 w-6 text-blue-500" />
-              Search Results for "{searchQuery}"
-            </h3>
-            <p className="text-gray-600 mt-2">
-              Found {filteredConverters.length} converter{filteredConverters.length !== 1 ? 's' : ''}
-            </p>
           </div>
         )}
 
@@ -575,63 +596,16 @@ const Index = () => {
           ))}
         </div>
 
-        {/* No Results Message */}
-        {searchQuery && filteredConverters.length === 0 && (
-          <div className="text-center py-12 bg-white rounded-lg shadow-md border border-red-100 animate-fadeIn">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No converters found</h3>
-            <p className="text-gray-600">Try a different search term or browse through the categories</p>
-          </div>
-        )}
-
-        {/* Middle Ad */}
-        <div className="my-8">
-          <GoogleAd slot="YOUR_MIDDLE_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
-        </div>
-
-        {/* Features Section */}
-        <section className="mt-20">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Why Choose ConvertHub?</h3>
-            <p className="text-lg text-gray-600">Professional tools for accurate calculations</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calculator className="h-8 w-8 text-blue-600" />
-              </div>
-              <h4 className="text-xl font-semibold mb-2">Accurate Calculations</h4>
-              <p className="text-gray-600">Precise formulas and real-time data for reliable results</p>
-            </div>
-            
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <DollarSign className="h-8 w-8 text-green-600" />
-              </div>
-              <h4 className="text-xl font-semibold mb-2">Real-time Rates</h4>
-              <p className="text-gray-600">Live currency exchange rates and updated information</p>
-            </div>
-            
-            <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Activity className="h-8 w-8 text-purple-600" />
-              </div>
-              <h4 className="text-xl font-semibold mb-2">Easy to Use</h4>
-              <p className="text-gray-600">Intuitive interface designed for quick calculations</p>
-            </div>
-          </div>
-        </section>
-
         {/* Bottom Ad */}
-        <div className="mt-8">
+        <div className="mt-2">
           <GoogleAd slot="YOUR_BOTTOM_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-gray-600">
+      <footer className="bg-white border-t mt-2">
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-4">
+          <div className="text-center text-gray-600 text-sm">
             <p>&copy; 2024 ConvertHub. All rights reserved. Professional conversion tools for everyone.</p>
           </div>
         </div>

@@ -615,56 +615,56 @@ const Units = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
+        <Card>
+          <CardHeader>
               <CardTitle>Convert {currentType.name}</CardTitle>
               <CardDescription>
                 Convert between different units of {currentType.name.toLowerCase()}
-              </CardDescription>
-            </CardHeader>
+            </CardDescription>
+          </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div>
                   <Label>From</Label>
                   <Select value={fromUnit} onValueChange={setFromUnit}>
-                    <SelectTrigger>
+                      <SelectTrigger>
                       <SelectValue placeholder="Select unit" />
-                    </SelectTrigger>
-                    <SelectContent>
+                      </SelectTrigger>
+                      <SelectContent>
                       {currentType.units.map((unit) => (
                         <SelectItem key={unit.name} value={unit.name}>
                           {unit.name} ({unit.symbol})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
                 <div>
                   <Label>To</Label>
                   <Select value={toUnit} onValueChange={setToUnit}>
-                    <SelectTrigger>
+                      <SelectTrigger>
                       <SelectValue placeholder="Select unit" />
-                    </SelectTrigger>
-                    <SelectContent>
+                      </SelectTrigger>
+                      <SelectContent>
                       {currentType.units.map((unit) => (
                         <SelectItem key={unit.name} value={unit.name}>
                           {unit.name} ({unit.symbol})
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                 </div>
 
                 <div>
                   <Label>Value</Label>
-                  <Input
-                    type="number"
+                    <Input
+                      type="number"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    placeholder="Enter value"
-                  />
-                </div>
+                      placeholder="Enter value"
+                    />
+                  </div>
 
                 <Button 
                   className="w-full bg-blue-600 hover:bg-blue-700"
@@ -699,7 +699,7 @@ const Units = () => {
               )}
             </CardContent>
           </Card>
-        </div>
+                </div>
 
         <Card className="mt-8">
           <CardHeader>
@@ -720,7 +720,7 @@ const Units = () => {
               <p className="text-sm text-gray-500 mt-4">
                 Note: All conversions are based on standard conversion factors. For temperature conversions, special formulas are used to ensure accurate results.
               </p>
-            </div>
+                </div>
           </CardContent>
         </Card>
       </div>
