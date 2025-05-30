@@ -127,10 +127,7 @@ const EPF = () => {
                 <h1 className="text-xl sm:text-2xl font-bold text-gray-900">EPF Calculator</h1>
               </div>
             </div>
-            <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700">
-              <Calculator className="h-4 w-4 mr-2" />
-              Open Calculator
-            </Button>
+            
           </div>
         </div>
       </header>
