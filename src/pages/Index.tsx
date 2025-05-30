@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Calculator, DollarSign, Activity, Clock, Ruler, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import GoogleAd from "@/components/GoogleAd";
 
 const Index = () => {
   const calculators = [
@@ -81,6 +81,11 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Top Ad */}
+        <div className="mb-8">
+          <GoogleAd slot="YOUR_TOP_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
+        </div>
+
         {/* Calculator Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {calculators.map((calc, index) => (
@@ -103,6 +108,11 @@ const Index = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Middle Ad */}
+        <div className="my-8">
+          <GoogleAd slot="YOUR_MIDDLE_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
         </div>
 
         {/* Features Section */}
@@ -138,6 +148,11 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Bottom Ad */}
+        <div className="mt-8">
+          <GoogleAd slot="YOUR_BOTTOM_AD_SLOT" format="horizontal" style={{ display: 'block', textAlign: 'center' }} />
+        </div>
       </section>
 
       {/* Footer */}

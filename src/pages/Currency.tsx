@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ArrowLeftRight, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,24 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast } from "sonner";
 
 const Currency = () => {
   const [amount, setAmount] = useState("1");
   const [fromCurrency, setFromCurrency] = useState("USD");
-  const [toCurrency, setToCurrency] = useState("EUR");
-  const [result, setResult] = useState("0.85");
-  const [exchangeRate, setExchangeRate] = useState("0.85");
-
-  // Mock exchange rates - in a real app, you'd fetch from an API
-  const exchangeRates = {
-    USD: { EUR: 0.85, GBP: 0.73, JPY: 110.0, INR: 74.5, AUD: 1.35, CAD: 1.25 },
-    EUR: { USD: 1.18, GBP: 0.86, JPY: 129.5, INR: 87.8, AUD: 1.59, CAD: 1.47 },
-    GBP: { USD: 1.37, EUR: 1.16, JPY: 150.8, INR: 102.1, AUD: 1.85, CAD: 1.71 },
-    JPY: { USD: 0.0091, EUR: 0.0077, GBP: 0.0066, INR: 0.68, AUD: 0.012, CAD: 0.011 },
-    INR: { USD: 0.013, EUR: 0.011, GBP: 0.0098, JPY: 1.48, AUD: 0.018, CAD: 0.017 },
-    AUD: { USD: 0.74, EUR: 0.63, GBP: 0.54, JPY: 81.5, INR: 55.2, CAD: 0.93 },
-    CAD: { USD: 0.80, EUR: 0.68, GBP: 0.58, JPY: 88.0, INR: 59.6, AUD: 1.08 }
-  };
+  const [toCurrency, setToCurrency] = useState("INR");
+  const [result, setResult] = useState("0");
+  const [exchangeRate, setExchangeRate] = useState("0");
+  const [isLoading, setIsLoading] = useState(false);
+  const [rates, setRates] = useState<Record<string, number>>({});
 
   const currencies = [
     { code: "USD", name: "US Dollar", symbol: "$" },
@@ -36,13 +27,37 @@ const Currency = () => {
   ];
 
   useEffect(() => {
-    if (amount && fromCurrency && toCurrency) {
-      const rate = exchangeRates[fromCurrency]?.[toCurrency] || 1;
-      const convertedAmount = parseFloat(amount) * rate;
-      setResult(convertedAmount.toFixed(2));
+    const fetchRates = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`https://open.er-api.com/v6/latest/${fromCurrency}`);
+        const data = await response.json();
+        if (data.result === 'success') {
+          setRates(data.rates);
+          const rate = data.rates[toCurrency];
+          setExchangeRate(rate.toFixed(4));
+          setResult((parseFloat(amount) * rate).toFixed(2));
+        } else {
+          toast.error("Failed to fetch exchange rates");
+        }
+      } catch (error) {
+        toast.error("Error fetching exchange rates");
+        console.error("Error fetching rates:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRates();
+  }, [fromCurrency]);
+
+  useEffect(() => {
+    if (rates[toCurrency]) {
+      const rate = rates[toCurrency];
       setExchangeRate(rate.toFixed(4));
+      setResult((parseFloat(amount) * rate).toFixed(2));
     }
-  }, [amount, fromCurrency, toCurrency]);
+  }, [amount, toCurrency, rates]);
 
   const swapCurrencies = () => {
     setFromCurrency(toCurrency);
@@ -127,7 +142,12 @@ const Currency = () => {
             </div>
 
             <div className="flex justify-center">
-              <Button onClick={swapCurrencies} variant="outline" size="sm">
+              <Button 
+                onClick={swapCurrencies} 
+                variant="outline" 
+                size="sm"
+                disabled={isLoading}
+              >
                 <ArrowLeftRight className="h-4 w-4 mr-2" />
                 Swap Currencies
               </Button>
@@ -135,7 +155,8 @@ const Currency = () => {
 
             <div className="text-center text-sm text-gray-600">
               <p>Exchange Rate: 1 {fromCurrency} = {exchangeRate} {toCurrency}</p>
-              <p className="mt-1">Rates are indicative and may vary from actual market rates</p>
+              <p className="mt-1">Real-time rates from Open Exchange Rates API</p>
+              {isLoading && <p className="text-blue-600">Updating rates...</p>}
             </div>
           </CardContent>
         </Card>
@@ -148,17 +169,19 @@ const Currency = () => {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                { from: "USD", to: "EUR", rate: "0.85" },
-                { from: "USD", to: "GBP", rate: "0.73" },
-                { from: "USD", to: "JPY", rate: "110.00" },
-                { from: "EUR", to: "GBP", rate: "0.86" },
-                { from: "USD", to: "INR", rate: "74.50" },
-                { from: "GBP", to: "INR", rate: "102.10" }
+                { from: "USD", to: "INR" },
+                { from: "EUR", to: "USD" },
+                { from: "GBP", to: "USD" },
+                { from: "USD", to: "JPY" },
+                { from: "EUR", to: "GBP" },
+                { from: "USD", to: "AUD" }
               ].map((pair, index) => (
                 <div key={index} className="bg-gray-50 p-3 rounded-lg">
                   <div className="flex justify-between items-center">
                     <span className="font-medium">{pair.from}/{pair.to}</span>
-                    <span className="text-gray-600">{pair.rate}</span>
+                    <span className="text-gray-600">
+                      {rates[pair.to] ? (rates[pair.to] / rates[pair.from]).toFixed(4) : "..."}
+                    </span>
                   </div>
                 </div>
               ))}
