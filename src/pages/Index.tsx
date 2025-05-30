@@ -574,22 +574,24 @@ const Index = () => {
               variant="outline"
               size="lg"
               onClick={prevSection}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all text-sm text-blue-800"
+              className="flex items-center space-x-2 px-3 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 border-blue-200 hover:bg-blue-100 transition-all text-sm text-blue-800 shadow-sm hover:shadow-md"
             >
-              <ChevronLeft className="h-4 w-4" />
-              <span>{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
+              <ChevronLeft className="h-5 w-5 text-blue-700" />
+              <span className="hidden sm:inline-block text-blue-800 font-medium">{sections[(activeSection - 1 + sections.length) % sections.length].title}</span>
+              <span className="sm:hidden text-blue-800 font-medium">Prev</span>
             </Button>
-            <div className={`px-4 py-2 rounded-lg text-white font-medium text-sm ${sectionColors[sections[activeSection].title]}`}>
+            <div className={`px-4 py-2 rounded-xl text-white font-medium text-sm shadow-md ${sectionColors[sections[activeSection].title]}`}>
               {sections[activeSection].title}
             </div>
             <Button
               variant="outline"
               size="lg"
               onClick={nextSection}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all text-sm text-blue-800"
+              className="flex items-center space-x-2 px-3 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 border-blue-200 hover:bg-blue-100 transition-all text-sm text-blue-800 shadow-sm hover:shadow-md"
             >
-              <span>{sections[(activeSection + 1) % sections.length].title}</span>
-              <ChevronRight className="h-4 w-4" />
+              <span className="hidden sm:inline-block text-blue-800 font-medium">{sections[(activeSection + 1) % sections.length].title}</span>
+              <span className="sm:hidden text-blue-800 font-medium">Next</span>
+              <ChevronRight className="h-5 w-5 text-blue-700" />
             </Button>
           </div>
         )}
